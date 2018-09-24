@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package = "clases">
+<class name = "Partida" table= "Partidas">
+    <id name= "id" column = "numero">
+        <generator class= "assigned"/>
+    </id>
+    <property name = "descripcion" column = "descripcion"></property>
+    <property name = "nombre" column ="nombre"></property>
+    <property name = "importe" column = "importe"></property>
+    <property name = "importeEjecutado" column= "importeEjecutado"></property>
+    <!-- <one-to-one name="padre" class="PartidaDescriptiva"/>-->
+    <joined-subclass name = "PartidaDescriptiva" table = "partidadescriptiva" extends = "Partida">
+       <key column = "id" not-null="true"/>
+       <map name = "hijos">
+           <key column = "idPadre" foreign-key = "padre"/>
+            <map-key type = "string" column= "map_index"/>
+            <one-to-many class= "Partida"/>
+       </map>
+    </joined-subclass>
+    <joined-subclass name= "PartidaImputable" table = "partidaimputable" extends= "Partida">
+         <key column="id"/>
+             <map name="movimientos">
+               <key column="id_Movimiento" foreign-key= "partidaImputable"/><!--va a ser una columna de la tabla movimiento con el id del PImputable >-->
+               <map-key type= "string" column="movimiento_index" /><!--será la columna de la tabla movimiento con el id de movimiento>-->
+               <one-to-many class="Movimiento"/>
+            </map>
+    </joined-subclass>
+    </class>
+</hibernate-mapping>

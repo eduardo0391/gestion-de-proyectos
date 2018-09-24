@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package= "clases">
+<class name= "Movimiento" table= "movimientos">
+    <id name="id" type= "string" column = "id">
+        <generator class = "assigned"/>
+    </id>
+    <property name= "fecha" type= "date" column="fecha"></property>
+    <property name = "descripcion" type="string" column= "descripcion"></property>
+    <property name= "importe" type = "double" column = "importeEjecutado"></property>
+</class>
+</hibernate-mapping>

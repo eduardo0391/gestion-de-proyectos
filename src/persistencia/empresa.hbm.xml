@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package= "clases">
+  <class name = "Empresa" table="Empresa">
+   <id name= "id" type="string" column = "id">
+     <generator class="assigned"/>
+   </id>
+   <property name = "nombre" column="nombre"></property>
+    <map name="proyectos">
+            <key column="idEmpresa"/>
+            <map-key type="string" column="map_index"/>
+            <one-to-many class="Proyecto"/>
+    </map>
+    <map name= "usuarios">
+        <key column= "idUsuario"></key><!-- va a ser una columna de la tabla usuarios, con id de la empresa-->
+        <map-key type= "string" column = "map_index"/> <!-- va a ser una columna de la tabla usuario, con su id-->
+        <one-to-many class = "Usuario"/>
+    </map>
+  </class>
+
+</hibernate-mapping>
